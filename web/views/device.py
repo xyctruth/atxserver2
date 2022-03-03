@@ -322,7 +322,7 @@ class DeviceListHandler(AuthRequestHandler):
 
     async def get(self):
         """ get data from database """
-        self.render("index.html", version=__version__)
+        self.render("index.html", version=__version__,user_id=self.get_argument("user_id",None))
 
 
 class DeviceChangesWSHandler(BaseWebSocketHandler):

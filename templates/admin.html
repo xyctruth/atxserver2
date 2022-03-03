@@ -56,7 +56,7 @@
                 methods: {
                     addAdmin() {
                         $.ajax({
-                            url: "/api/v1/admins",
+                            url: "/api/v1/admins?user_id={{user_id}}",
                             method: "post",
                             data: JSON.stringify({
                                 email: this.formEmail,

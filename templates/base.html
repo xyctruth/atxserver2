@@ -45,7 +45,7 @@
                     <div class="navbar-nav navbar-right ml-auto">
                         {% if current_user.admin %}
                         <div class="nav-item">
-                            <a class="nav-link" href="/admin"><i class="fas fa-users-cog"></i> 后台管理</a>
+                            <a class="nav-link" href="/admin?user_id={{user_id}}"><i class="fas fa-users-cog"></i> 后台管理</a>
                         </div>
                         {% end %}
                         <div class="nav-item dropdown">
@@ -54,8 +54,8 @@
                                 {{current_user.username}}
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                <a class="dropdown-item" href="/user">用户信息</a>
-                                <a class="dropdown-item" href="/logout">Logout</a>
+                                <a class="dropdown-item" href="/user?user_id={{user_id}}">用户信息</a>
+                                <a class="dropdown-item" href="/logout?user_id={{user_id}}">Logout</a>
                             </div>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
                 el: "#navbarNavDropdown",
                 data: {
                     links: [{
-                        path: "/devices",
+                        path: "/devices?user_id={{user_id}}",
                         name: "设备列表",
                         icon: ["fas", "fa-th-list"]
                         // icon: ["fab", "fa-android"]
@@ -82,7 +82,7 @@
                         //     name: "苹果设备",
                         //     icon: ["fab", "fa-apple"]
                     }, {
-                        path: "/uploads",
+                        path: "/uploads?user_id={{user_id}}",
                         name: "文件上传",
                         icon: ["fas fa-cloud-upload-alt"]
                     }],

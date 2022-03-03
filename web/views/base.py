@@ -48,11 +48,10 @@ class CurrentUserMixin(object):
                     return self.bunchify(users[0])
             raise tornado.web.HTTPError(403)
 
-        id = self.get_secure_cookie("user_id")  # here is bytes not str
-        if id:
-            id = id.decode()
-        return self.bunchify(
+        id = self.get_argument("user_id", None)
+        user = self.bunchify(
             await db.table("users").get(id).run() if id else None)
+        return user
 
     async def set_current_user(self, email: str, username: str):
         ret = await db.table("users").save({
@@ -78,7 +77,7 @@ class CurrentUserMixin(object):
                 "lastLoggedInAt": time_now(),
             }, ret['id'])
 
-        self.set_secure_cookie("user_id", ret['id'])
+        return ret['id']
 
 
 class BaseRequestHandler(CurrentUserMixin, tornado.web.RequestHandler):

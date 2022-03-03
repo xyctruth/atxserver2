@@ -13,4 +13,4 @@ class LogoutHandler(BaseRequestHandler):
 
 class MainHandler(AuthRequestHandler):
     def get(self):
-        self.redirect("/devices")
+        self.redirect("/devices?user_id="+ self.get_argument("user_id", None))

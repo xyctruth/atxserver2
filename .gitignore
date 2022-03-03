@@ -109,3 +109,5 @@ run.bat
 .vscode/
 uploads/
 rethinkdb_data/
+
+.idea

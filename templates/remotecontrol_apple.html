@@ -552,7 +552,7 @@
           stopUsing() {
             $.ajax({
               method: "delete",
-              url: "/api/v1/user/devices/" + this.udid,
+              url: "/api/v1/user/devices/" + this.udid+"?user_id={{user_id}}",
               dataType: "json"
             }).always(() => {
               window.close()

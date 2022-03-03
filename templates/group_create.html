@@ -40,7 +40,7 @@
             submit() {
                 $.ajax({
                     method: "post",
-                    url: "/api/v1/user/groups",
+                    url: "/api/v1/user/groups?user_id={{user_id}}",
                     data: {
                         id: this.id,
                         name: this.name,

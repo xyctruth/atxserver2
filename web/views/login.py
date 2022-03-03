@@ -32,7 +32,6 @@ class OpenIdLoginHandler(BaseRequestHandler, OpenIdMixin):
 
 class SimpleLoginHandler(BaseRequestHandler):
     def get(self):
-        self.set_cookie("next", self.get_argument("next", "/"))
         self.write('<html><body><form action="/login" method="post">'
                    'Name: <input type="text" name="name" required>'
                    '<input type="submit" value="Sign in">'
@@ -41,10 +40,8 @@ class SimpleLoginHandler(BaseRequestHandler):
     async def post(self):
         name = self.get_argument("name")
         email = name + "@anonymous.com"
-        await self.set_current_user(email, name)
-        next_url = self.get_cookie("next", "/")
-        self.clear_cookie("next")
-        self.redirect(next_url)
+        userid =  await self.set_current_user(email, name)
+        self.redirect("/?user_id="+userid)
 
 
 class GithubLoginHandler(BaseRequestHandler, GithubOAuth2Mixin):

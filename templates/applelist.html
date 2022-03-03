@@ -148,7 +148,7 @@
                     deviceAcquire(udid) { // for multi device acquire
                         return $.ajax({
                             method: "post",
-                            url: "/api/v1/user/devices",
+                            url: "/api/v1/user/devices?user_id={{user_id}}",
                             data: JSON.stringify({
                                 "udid": udid,
                             }),
@@ -161,7 +161,7 @@
                     deviceRelease(udid) {
                         $.ajax({
                             method: "delete",
-                            url: "/api/v1/user/devices/" + udid,
+                            url: "/api/v1/user/devices/" + udid+"?user_id={{user_id}}",
                             dataType: "json",
                         })
                             .then(ret => {

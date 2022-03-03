@@ -160,7 +160,8 @@ class="container-fluid"
     console.log(admin)
 </script>
 <script>
-    $.getJSON("/api/v1/devices?present=true")
+    console.log("V{{user_id}}")
+    $.getJSON("/api/v1/devices?present=true&user_id={{user_id}}")
         .then((ret) => {
             new Vue({
                 el: "#app",
@@ -310,7 +311,7 @@ class="container-fluid"
                     },
                     updatePropertyId(udid, text) { // admin required
                         $.ajax({
-                            url: "/api/v1/devices/" + udid + "/properties",
+                            url: "/api/v1/devices/" + udid + "/properties?user_id={{user_id}}",
                             method: "put",
                             contentType: "application/json",
                             data: JSON.stringify({
@@ -326,7 +327,7 @@ class="container-fluid"
                     },
                     updatePropertyName(udid, text) { // admin required
                         $.ajax({
-                            url: "/api/v1/devices/" + udid + "/properties",
+                            url: "/api/v1/devices/" + udid + "/properties?user_id={{user_id}}",
                             method: "put",
                             contentType: "application/json",
                             data: JSON.stringify({
@@ -342,7 +343,7 @@ class="container-fluid"
                     },
                     updateDeviceDepartment(udid, text) { // admin required
                         $.ajax({
-                            url: "/api/v1/devices/" + udid,
+                            url: "/api/v1/devices/" + udid+"?user_id={{user_id}}",
                             method: "put",
                             contentType: "application/json",
                             data: JSON.stringify({
@@ -363,7 +364,7 @@ class="container-fluid"
                     deviceAcquire(udid) { // for multi device acquire
                         return $.ajax({
                             method: "post",
-                            url: "/api/v1/user/devices",
+                            url: "/api/v1/user/devices?user_id={{user_id}}",
                             data: JSON.stringify({
                                 "udid": udid,
                             }),
@@ -376,7 +377,7 @@ class="container-fluid"
                     deviceRelease(udid) {
                         $.ajax({
                             method: "delete",
-                            url: "/api/v1/user/devices/" + udid,
+                            url: "/api/v1/user/devices/" + udid+"?user_id={{user_id}}",
                             dataType: "json",
                         })
                     },
@@ -467,7 +468,7 @@ class="container-fluid"
                 },
                 mounted() {
                     let scheme = location.protocol === 'https' ? 'wss' : 'ws';
-                    let wsURL = scheme + "://" + location.host + "/websocket/devicechanges";
+                    let wsURL = scheme + "://" + location.host + "/websocket/devicechanges?user_id={{user_id}}";
                     let ws = new WebSocket(wsURL);
                     let refreshKey = null;
                     ws.onopen = (evt) => {
