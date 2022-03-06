@@ -78,7 +78,7 @@ class="container-fluid"
                     <el-button @click="deviceRelease(scope.row.udid)" size="mini" type="danger">停用</el-button>
                 </template>
                 <template v-else>
-                    <a :href='"/devices/"+scope.row.udid+"/remotecontrol"' target="_blank">
+                    <a :href='"/devices/"+scope.row.udid+"/remotecontrol?user_id={{user_id}}"' target="_blank">
                         <el-button size="mini">
                             <span style="color: blue">点击使用</span>
                         </el-button>

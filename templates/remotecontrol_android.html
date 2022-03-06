@@ -451,7 +451,7 @@
   const udid = "{{udid}}"
   const userEmail = "{{current_user.email}}"
 
-  $.getJSON("/api/v1/user/devices/" + udid)
+  $.getJSON("/api/v1/user/devices/" + udid+"?user_id={{user_id}}")
     .then(ret => {
       vm = new Vue({
         el: "#content-wrapper",
@@ -702,7 +702,7 @@
             // })
             $.ajax({
               method: "get",
-              url: this.deviceUrl + "/info/rotation"
+              url: this.deviceUrl + "/info/rotation" + "?user_id={{user_id}}",
             }).done(ret => {
               this.$notify({
                 message: "Rotation updated",
@@ -714,7 +714,7 @@
           stopUsing() {
             $.ajax({
               method: "delete",
-              url: "/api/v1/user/devices/" + this.udid+"?user_id={{user_id}}",
+              url: "/api/v1/user/devices/" + this.udid + "?user_id={{user_id}}",
               dataType: "json"
             }).always(() => {
               window.close()
@@ -730,7 +730,7 @@
           runShell(command) {
             return $.ajax({
               method: "get",
-              url: this.deviceUrl + "/shell",
+              url: this.deviceUrl + "/shell" + "?user_id={{user_id}}",
               data: {
                 "command": command,
               },
