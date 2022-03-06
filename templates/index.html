@@ -90,7 +90,7 @@ class="container-fluid"
             <template slot-scope="scope">
                 <template v-if="scope.row.status == 'stop using'">
                     <a style="font-family: 'Courier New'" :title="scope.row.prop_serial || scope.row.udid"
-                        :href='"/devices/"+scope.row.udid+"/remotecontrol"'
+                        :href='"/devices/"+scope.row.udid+"/remotecontrol"+"?user_id={{user_id}}"'
                         target="_blank">{{!(scope.row.prop_serial || scope.row.udid) | shortString}}</a>
                 </template>
                 <template v-else>

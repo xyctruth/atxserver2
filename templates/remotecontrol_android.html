@@ -651,7 +651,7 @@
             }))
           },
           loadUserSettings() {
-            return $.getJSON("/api/v1/user/settings").then(ret => {
+            return $.getJSON("/api/v1/user/settings?user_id={{user_id}}").then(ret => {
               this.userSettings.shortcuts = ret.shortcuts || []
             })
           },
@@ -1336,7 +1336,7 @@
                     })
                   })
               } else {
-                $.getJSON("/api/v1/user/devices/" + udid + "/active")
+                $.getJSON("/api/v1/user/devices/" + udid + "/active" + "?user_id={{user_id}}")
                   .done((ret) => {
                     this.closeWindowWhenReleased(interval)
                   })
