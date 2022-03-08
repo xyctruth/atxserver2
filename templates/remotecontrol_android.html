@@ -122,8 +122,8 @@
             {{current_user.email}}
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item" href="/user">用户信息</a>
-            <a class="dropdown-item" href="/logout">Logout</a>
+            <a class="dropdown-item" href="/user?user_id={{user_id}}">用户信息</a>
+            <a class="dropdown-item" href="/logout?user_id={{user_id}}">Logout</a>
           </div>
         </div>
         <form class="form-inline">

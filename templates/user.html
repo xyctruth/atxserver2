@@ -18,7 +18,7 @@
 {% end %}
 
 {% block navlinks %}
-<a href="/user" class="nav-item nav-link active">
+<a href="/user?user_id={{user_id}}" class="nav-item nav-link active">
     <i class="fas fa-user"></i> 用户信息
 </a>
 {% end %}
@@ -46,7 +46,7 @@
     </div>
     <div>
         <hr>
-        <h4>组管理 <a href="/user/group_create"><small>创建组</small></a></h4>
+        <h4>组管理 <a href="/user/group_create?user_id={{user_id}}"><small>创建组</small></a></h4>
         <el-table :data="groups">
             <el-table-column prop="id" label="名称"></el-table-column>
             <el-table-column prop="name" label="备注"></el-table-column>
@@ -62,7 +62,7 @@
 
 {% block script %}
 <script>
-    $.getJSON("/api/v1/user")
+    $.getJSON("/api/v1/user?user_id={{user_id}}")
         .then((ret) => {
             console.log(ret)
             new Vue({
