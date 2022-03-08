@@ -8,6 +8,7 @@ from .auth import AuthError, OpenIdMixin, GithubOAuth2Mixin
 from .base import BaseRequestHandler
 
 from ..settings import AUTH_BACKENDS, GITHUB
+import tornado
 
 
 class OpenIdLoginHandler(BaseRequestHandler, OpenIdMixin):
@@ -31,14 +32,15 @@ class OpenIdLoginHandler(BaseRequestHandler, OpenIdMixin):
 
 
 class SimpleLoginHandler(BaseRequestHandler):
-    def get(self):
+    @tornado.web.asynchronous
+    async def get(self):
         name = self.get_argument("name", "")
         logger.info("name: %s", name)
 
         if name:
             name = self.get_argument("name")
             email = name + "@anonymous.com"
-            userid =  self.set_current_user(email, name)
+            userid = await self.set_current_user(email, name)
             logger.info("userid: %s", userid)
 
             self.redirect("/?user_id=" + userid)
@@ -47,11 +49,12 @@ class SimpleLoginHandler(BaseRequestHandler):
                'Name: <input type="text" name="name" required>'
                '<input type="submit" value="Sign in">'
                '</form></body></html>')
+        self.finish()
 
     async def post(self):
         name = self.get_argument("name")
         email = name + "@anonymous.com"
-        userid = await self.set_current_user(email, name)
+        userid =  await self.set_current_user(email, name)
         self.redirect("/?user_id="+userid)
 
 
