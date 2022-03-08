@@ -10,7 +10,7 @@ from .base import AuthRequestHandler, AdminRequestHandler
 
 class UserHandler(AuthRequestHandler):
     def get(self):
-        self.render("user.html")
+        self.render("user.html", user_id=self.get_argument("user_id", None))
 
 
 class AdminListHandler(AdminRequestHandler):
