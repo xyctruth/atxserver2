@@ -33,14 +33,14 @@ class OpenIdLoginHandler(BaseRequestHandler, OpenIdMixin):
 
 class SimpleLoginHandler(BaseRequestHandler):
     @tornado.web.asynchronous
-    async def get(self):
+    def get(self):
         name = self.get_argument("name", "")
         logger.info("name: %s", name)
 
         if name:
             name = self.get_argument("name")
             email = name + "@anonymous.com"
-            userid = await self.set_current_user(email, name)
+            userid = self.set_current_user(email, name)
             logger.info("userid: %s", userid)
 
             self.redirect("/?user_id=" + userid)
